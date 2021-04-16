@@ -8,7 +8,37 @@
 }
 
 /*Util class*/
+.container{
+    width: 1100px;
+    height: 100%;
+    margin: auto;
+    padding: 2rem;
+}
 
+.alert{
+    color:white;
+    font-size: 1.4rem;
+    padding: 0.75rem;
+    margin: 1rem auto;
+    width: 75%;
+}
+
+.alert-danger{
+    background-color: #ef233c;
+}
+
+.space{
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+.space-half{
+    margin-right: .5rem;
+    margin-left: .5rem;
+}
+.space-qt{
+    margin-right: .25rem;
+    margin-left: .25rem;
+}
 .fs-1{
     font-size: 1rem;
     font-weight: bolder;
@@ -20,11 +50,22 @@
 
 .btn{
     padding: .55rem;
+    font-weight: bolder;
     color: white;
     background: #3a0ca3;
     border: none;
     border-radius: 5px;
     margin: 0.55rem 0rem;
+}
+.btn:focus{
+    border: none;
+}
+.btn-delete{
+background:#fb5607;
+margin-left: 0.55rem;
+}
+.btn-edit{
+background: #ffbe0b;
 }
 .btn-block{
     display: block;
@@ -37,9 +78,16 @@
     display: inline-block;
     width: 100%;
 }
+input[type=text]:focus{
+    border: none;
+    border-style: none;
+}
 label{
     padding: 0.55rem 0rem;
 }
+
+
+
 
 #navbar{
   height: 3rem;
@@ -53,8 +101,7 @@ label{
 ul{
     display: flex;
     align-items: center;
-    justify-content:  center;
-    
+    justify-content:  center; 
 }
 
 .logo{
@@ -100,5 +147,47 @@ padding: 0.55rem 0rem;
 .contact-page{
     display: grid;
     grid-template-columns: repeat(2,400px);
-    grid-gap: 1fr;
+    grid-gap: 50px 250px;
+    
+}
+.contact-form-container{
+margin: 0px 10rem;
+}
+.list-contacts{
+    
+}
+
+/*Contact Item*/
+
+.contactitem-container{
+    display: flex;
+    flex-direction: column;
+    padding: .5rem 2rem;
+    margin: 1rem 0rem;
+    background: #3a86ff;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 4px .2px black;
+}
+.contactitem-ul{
+display: block;
+}
+.contactitem-ul li{
+    margin: 0.77rem 0rem;
+    font-weight: bolder;
+    }
+.contactitem-type{
+    font-style: italic;
+}
+/*Add Contact*/
+.addcontact-form{
+    height: 400px;
+    width: 300px;
+    border: 1px solid #ef476f;
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin: 5rem auto;
+}
+.contactitem-type{
+    
 }
