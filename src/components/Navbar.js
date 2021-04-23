@@ -1,7 +1,13 @@
-import React,{Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import React,{ Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AuthState from './context/authcontext/Authcontext';
 
 const Navbar = ()=>{
+
+    const authState=useContext(AuthState);
+
+    const { isAuthenticated }=authState;
+
     return(
         <Fragment>
              <nav id="navbar">
@@ -10,8 +16,8 @@ const Navbar = ()=>{
                 </div>
                 <ul>
                     <li> <Link to="/home" className="navbar-link fs-2">Home</Link> </li>
-                    <li> <Link to="/login" className="navbar-link fs-2">Login</Link> </li>
-                    <li> <Link to="/signup" className="navbar-link fs-2">Signup</Link> </li>
+                    <li>{ isAuthenticated ? <Link to="/logout" className="navbar-link fs-2"> Logout</Link>:<Link to="/login" className="navbar-link fs-2"> Login</Link>  }</li>
+                    <li>{ !isAuthenticated ? <Link to="/signup" className="navbar-link fs-2">Signup</Link> :""  }</li>
                 </ul>
             </nav>
         </Fragment>

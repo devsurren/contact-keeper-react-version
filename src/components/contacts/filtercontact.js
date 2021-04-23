@@ -10,6 +10,7 @@ const FilterContact=()=>{
     const text = useRef("");
 
     useEffect(()=>{
+        console.log("filtered useEffect Firied");
        if(filtered==null) text.current.value='';
     },[contactContext,filtered]); 
 
@@ -23,7 +24,9 @@ const FilterContact=()=>{
     }
 
     return(
-        <input ref={text} onChange={onChange} className="input-box" placeholder="search..."  />
+        <div className="fil-container">
+                <input ref={text} onChange={onChange} className="input-box-half" placeholder="Search...." />           
+        </div>
     );
 }
 

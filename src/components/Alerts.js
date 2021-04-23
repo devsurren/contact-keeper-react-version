@@ -1,5 +1,5 @@
-import react,{useContext} from 'react';
-import AlertContext from './context/alertcontext/alertcontext'
+import react,{ useContext } from 'react';
+import AlertContext from './context/alertcontext/alertcontext';
 
 const Alert=()=>{
 
@@ -8,7 +8,7 @@ const Alert=()=>{
   console.log(alertContext.state.length);
 
  return(
-  alertContext.state.length>0 && alertContext.state.map(
+  alertContext.state.length>0 ? alertContext.state.map(
     (eachalert)=>{
        return(
         <div key={eachalert.id} className={`alert alert-danger`}>
@@ -16,7 +16,7 @@ const Alert=()=>{
       </div>
        );
     }
- )//alertcontextmap
+ ):""//alertcontextmap
  );
 }//Alert
 

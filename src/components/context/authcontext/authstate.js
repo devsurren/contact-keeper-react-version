@@ -1,9 +1,17 @@
-import React,{useReducer} from 'react';
+import React,{ useReducer } from 'react';
 import AuthContext  from '../authcontext/Authcontext';
 import authreducer from '../authcontext/authreducer';
 import axios from 'axios';
-import{REGISTER_SUCCESS,REGISTER_FAIL} from '../../types/types';
-import {url}from '../../../config/config';
+import { url }from '../../../config/config';
+import { settingUpGlobalHeader }from '../../utils/utils';
+import{ REGISTER_SUCCESS,
+    REGISTER_FAIL,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOAD_USER, 
+    AUTH_ERROR, 
+    LOGOUT} from '../../types/types';
+
 
 const AuthState=(props)=>{
 
@@ -17,16 +25,20 @@ const initialState={
 
 const [state,dispatch]= useReducer(authreducer,initialState);
 
-//Register User
+const Test=()=>{
+    console.log("Called from AuthState Test");
+}
 
+//Register User
 const registeruser=async(userformdata)=>{
     const config={
         headers:{
-            'Content-Type':'application/json'
-        }
+            'Accept':'application/json'
+        },
+        credentials: 'same-origin'
     }
     try {
-        const res=await axios.post(`${url}/api/v1/signup`,userformdata,config);
+        const res=await axios.post(`${url}/signup`,userformdata,config);
        if(res) console.log(res.data);
         dispatch({type:REGISTER_SUCCESS,payload:res.data});
     } catch (error) {
@@ -35,6 +47,54 @@ const registeruser=async(userformdata)=>{
         dispatch({type:REGISTER_FAIL,payload:error.response.data.msg})
     }
 }
+
+
+//Load User
+ const loadUser=async()=>{
+
+    const config={
+        headers:{
+            'Accept':'application/json'
+        },
+        credentials: 'same-origin'
+    }
+    if(localStorage.token) settingUpGlobalHeader(localStorage.token);
+
+    try {
+        const res=await axios.get(`${url}/auth`,config);
+       if(res) console.log(res.data);
+        dispatch({type:LOAD_USER,payload:res.data});
+    } catch (error) {
+        console.log(error.message);
+        dispatch({type:AUTH_ERROR,payload:error.response.data.msg})
+    }
+
+ }
+
+ //LOGIN_USER
+ const loginUser=async(user)=>{
+    const config={
+        headers:{
+            'Accept':'application/json'
+        },
+        credentials: 'same-origin'
+    }
+
+ try {
+    const res=await axios.post(`${url}/auth`,user,config);
+    dispatch({type:LOGIN_SUCCESS,payload:res.data});
+ } 
+ catch (error) {
+     console.log(error.response.data);
+     dispatch({type:LOGIN_FAIL,payload:error.response.data.msg});
+ } 
+ }
+
+ const logOut=()=>{
+     dispatch({type:LOGOUT});
+ }
+ 
+ 
 
 return(
     <AuthContext.Provider
@@ -46,6 +106,10 @@ return(
         loading:state.loading,
         error:state.error,
         registeruser,
+        loadUser,
+        loginUser,
+        logOut,
+        Test
     }
     }
     >

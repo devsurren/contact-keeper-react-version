@@ -1,9 +1,24 @@
-import React,{Fragment} from 'react';
+import React,{Fragment, useContext, useEffect} from 'react';
+import { withRouter } from 'react-router-dom';
 import AddContact from '../contacts/addcontact';
 import Contacts from '../contacts/contacts';
 import FilterContact from '../contacts/filtercontact';
+ import AuthContext from '../context/authcontext/Authcontext';
+ import ContactContext from '../context/Contactcontext';
 
-const Home=()=>{
+const Home=(props)=>{
+
+   const { loadUser,isAuthenticated }=useContext(AuthContext);
+   const { addcontact  }=useContext(ContactContext);
+
+ 
+
+  useEffect(()=>{
+    if(!isAuthenticated) props.history.push('/login'); 
+    loadUser();
+    if(isAuthenticated) addcontact();
+  },[])
+
   return(
       <Fragment>
     <FilterContact />
@@ -19,4 +34,4 @@ const Home=()=>{
       </Fragment>
   )
 }
-export default Home;
+export default withRouter(Home);

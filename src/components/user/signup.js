@@ -1,51 +1,62 @@
 import React,{Fragment,useContext,useState,useEffect} from "react";
+import { withRouter  } from 'react-router-dom';
 import AuthContext from "../context/authcontext/Authcontext";
 import AlertContext from "../context/alertcontext/alertcontext";
 
-const Signup=()=>{
+const Signup=(props)=>{
+
+    const{ history }=props
 
     const authContext = useContext(AuthContext);
 
     const alertContext = useContext(AlertContext);
 
-    const { registeruser,error  }=authContext;
+    const { registeruser,error,user,loadUser,isAuthenticated  }=authContext;
     const { settingAlert }=alertContext
 
-    const[user,setUser]=useState({
+    const[User,setUser]=useState({
         name:'',
         email:'',
         password:'',
         password2:''
     })
     useEffect(()=>{
+        if(isAuthenticated){
+            loadUser();
+            history.push('/home')
+        }
         if(error==='User Already There') settingAlert(error,'danger');
-
-    },[error])
+        if(error)  setTimeout(() => {
+            window.location.reload(); 
+        }, 3000);
+    },[error,isAuthenticated,props.history])
     
     const signupvalidator=(user)=>{
             let checked=false;
             const{name,email,password,password2}=user;
         if(name===''||email===''||password===''||password2===''){
-           return settingAlert('Please fill all the fields','danger');
-        }else if(password!==password2){
-           return settingAlert('Password dosent match');
-        }else{
+           settingAlert('Please fill all the fields','danger');
+        } 
             checked=true;
             return checked;
-        }
+        
     }
 
     const onChange=(event)=>{
-        setUser({...user,[event.target.name]:event.target.value});
+        setUser({...User,[event.target.name]:event.target.value});
     }
 
     const onSubmit=(event)=>{
-        const{name,email,password}=user;    
+        const{name,email,password,password2}=User;    
         event.preventDefault();
-        const isvalidated=signupvalidator(user);
+           if(password!==password2){
+       return  settingAlert('Password dosent match','danger');
+    }
+       const isvalidated=signupvalidator(User);
+    
         if(isvalidated){
             console.log("Firing Signup Event");
-            console.log(user);
+            console.log(User);
             registeruser({name,email,password});
          }else{
              settingAlert(error,'danger');
@@ -78,4 +89,4 @@ const Signup=()=>{
     );
 }
 
-export default Signup;
+export default withRouter(Signup);

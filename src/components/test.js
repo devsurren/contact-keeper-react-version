@@ -1,9 +1,15 @@
 import React from 'react';
 
-const Test =()=>{
-    return(
-        <h1>Test</h1>
-    );
-}
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default Test;
+export function Tostify(){
+  const notify = () => toast("Wow so easy!");
+
+  return (
+    <div>
+      <button onClick={notify}>Notify!</button>
+      <ToastContainer />
+    </div>
+  );
+}

@@ -3,9 +3,11 @@ const ContactReducer=(state,action)=>{
    
     switch (action.type) {
         case "ADD_CONTACT":
+            console.log('Firing ADD_CONTACT reducer');
+            console.log(action.payload);
             return{
                 ...state,
-                contacts:[...state.contacts,action.payload]
+                contacts:[action.payload,...state.contacts,]
             };
         case "DELETE_CONTACT":
             console.log("Firing DELETE_CONTACT reducer")
@@ -23,7 +25,15 @@ const ContactReducer=(state,action)=>{
                 ...state,
                 current:null
             };
+        case "CLEAR_CONTACT":
+            return{
+                ...state,
+                contacts:[],
+                current:null,
+                filtered:null
+            }
         case "EDIT_CONTACT":
+            console.log("Firing Edit Contact Reducer")
             return{
                 ...state,
                 contacts:state.contacts.map((eachcontact)=>{

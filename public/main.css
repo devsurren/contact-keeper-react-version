@@ -52,7 +52,7 @@
     padding: .55rem;
     font-weight: bolder;
     color: white;
-    background: #3a0ca3;
+    background:#3a86ff;
     border: none;
     border-radius: 5px;
     margin: 0.55rem 0rem;
@@ -72,22 +72,35 @@ background: #ffbe0b;
     width: 100%;
 }
 .input-box{
+    font-size: 1.4rem;
     padding: 0.55rem 0rem;
-    border: 0.7px solid #ef476f;
+    border: 0.7px solid #3a86ff;
     border-radius: 5px;
     display: inline-block;
     width: 100%;
 }
-input[type=text]:focus{
-    border: none;
-    border-style: none;
+
+.input-box-half{
+    font-size: 1.4rem;
+    padding: 0.55rem 0rem;
+    margin: 1rem;
+    border: 0.7px solid #3a86ff;
+    border-radius: 5px;
+    display: inline-block;
+    width: 35%;
 }
+
+input:focus{
+    border: none;
+}
+
 label{
     padding: 0.55rem 0rem;
 }
 
 
 
+/*NavBar*/
 
 #navbar{
   height: 3rem;
@@ -120,7 +133,7 @@ ul{
 .form{
     height: 250px;
     width: 300px;
-    border: 1px solid #ef476f;
+    border: 1px solid #3a86ff;
     border-radius: 5px;
     padding: 1.5rem;
     margin: 5rem auto;
@@ -134,16 +147,17 @@ padding: 0.55rem 0rem;
  width: 100%;
 
 }
-/*Signup*/
 
+/*Signup*/
 .signup-form{
-    height: 420px;
+    height: 450px;
     width: 300px;
-    border: 1px solid #ef476f;
+    border: 1px solid #3a86ff;
     border-radius: 5px;
     padding: 1.5rem;
     margin: 5rem auto;
 }
+
 .contact-page{
     display: grid;
     grid-template-columns: repeat(2,400px);
@@ -190,4 +204,15 @@ display: block;
 }
 .contactitem-type{
     
+}
+
+/*
+Filter Container
+*/
+
+.fil-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -3,7 +3,10 @@ import ContactContext from '../context/Contactcontext';
 
 const ContactItem=(props)=>{
     const {contact}=props;
-    const {id,name,email,phone,type }=contact;
+    
+    const {_id,name,email,phone,type }=contact;
+
+    //console.log('contact item id',_id)
 
     const contactContext = useContext(ContactContext);
     
@@ -14,8 +17,11 @@ const ContactItem=(props)=>{
     };
 
     const onDelete=()=>{
-        deletecontact(id);
+        deletecontact(_id);
         clearcurrent();
+       setTimeout(() => {
+            window.location.reload();
+       }, 1000);
     }
 
     return(
